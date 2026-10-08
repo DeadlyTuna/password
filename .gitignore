@@ -1,0 +1,6 @@
+datasets/
+data/sample.csv
+results/model.pkl
+__pycache__/
+.ipynb_checkpoints/
+web/dist/*.tmp

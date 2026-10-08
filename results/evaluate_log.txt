@@ -1,0 +1,89 @@
+shape: (200000, 13)
+strength
+Weak      80000
+Strong    80000
+Medium    40000
+
+Majority baseline (always Weak): 0.4000
+
+Precomputing per-fold Markov features...
+  Markov order 1 fold 0: 94 contexts
+  Markov order 1 fold 1: 94 contexts
+  Markov order 1 fold 2: 94 contexts
+  Markov order 1 fold 3: 94 contexts
+  Markov order 1 fold 4: 94 contexts
+  Markov order 2 fold 0: 8,836 contexts
+  Markov order 2 fold 1: 8,836 contexts
+  Markov order 2 fold 2: 8,836 contexts
+  Markov order 2 fold 3: 8,836 contexts
+  Markov order 2 fold 4: 8,836 contexts
+  Markov order 3 fold 0: 546,866 contexts
+  Markov order 3 fold 1: 545,972 contexts
+  Markov order 3 fold 2: 546,379 contexts
+  Markov order 3 fold 3: 545,878 contexts
+  Markov order 3 fold 4: 545,646 contexts
+
+== base-4 bins: 0.8939 ± 0.0043
+              precision    recall  f1-score   support
+
+        Weak     0.8693    0.9919    0.9266     80000
+      Medium     0.8073    0.9007    0.8515     40000
+      Strong     0.9892    0.7925    0.8800     80000
+
+    accuracy                         0.8939    200000
+   macro avg     0.8886    0.8950    0.8860    200000
+weighted avg     0.9049    0.8939    0.8929    200000
+
+
+== + pattern: 0.9066 ± 0.0010
+              precision    recall  f1-score   support
+
+        Weak     0.9140    0.9929    0.9518     80000
+      Medium     0.7716    0.9250    0.8414     40000
+      Strong     0.9961    0.8111    0.8941     80000
+
+    accuracy                         0.9066    200000
+   macro avg     0.8939    0.9097    0.8958    200000
+weighted avg     0.9183    0.9066    0.9066    200000
+
+
+== + Markov: 0.8980 ± 0.0010
+              precision    recall  f1-score   support
+
+        Weak     0.8893    0.9948    0.9391     80000
+      Medium     0.7816    0.9367    0.8522     40000
+      Strong     0.9998    0.7820    0.8775     80000
+
+    accuracy                         0.8980    200000
+   macro avg     0.8902    0.9045    0.8896    200000
+weighted avg     0.9119    0.8980    0.8971    200000
+
+
+McNemar:
+           A         B  b_A_only  c_B_only        chi2        p_chi2       p_exact
+base-4 bins + pattern       569      3106 1750.012517  0.000000e+00  0.000000e+00
+base-4 bins  + Markov      1306      2132  197.971204  5.788574e-45  2.188887e-45
+  + pattern  + Markov      2640       929  819.305127 3.426422e-180 1.030505e-187
+
+Markov orders:
+        contexts  unseen_ctx_Weak  unseen_ctx_Medium  unseen_ctx_Strong  mean_score_Weak  mean_score_Medium  mean_score_Strong  cv_acc
+order                                                                                                                                
+1          94.0           0.0000             0.0000             0.0000          -3.4599            -2.9570            -4.1353  0.8985
+2        8836.0           0.0000             0.0000             0.0000          -3.1679            -2.4762            -4.0339  0.8980
+3      546148.2           0.0051             0.0033             0.2412          -3.2565            -2.2182            -3.9202  0.8996
+
+Chi-square: 55/108 pairs violate independence
+        unit   class  distinct  shannon_bits  log2_G  min_entropy_bits
+0   password     All    199245        17.602  16.599            16.025
+1   password    Weak     79441        16.274  15.268            14.703
+2   password  Medium     39853        15.280  14.277            13.703
+3   password  Strong     79984        16.287  15.287            15.288
+4  base word     All    165535        17.061  16.078            12.251
+5  base word    Weak     63422        15.520  14.630            11.241
+6  base word  Medium     26262        14.514  13.281            12.288
+7  base word  Strong     78171        16.225  15.221            12.480
+        unit  distinct  max_freq  n_freq_ge2  fit_ranks  slope  zipf_s
+0   password    199245         3         749       1000 -0.166   0.166
+1  base word    165535        41       14866       1000 -0.273   0.273
+
+Saved figures to results/figures and tables to results/tables.
